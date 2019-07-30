@@ -1,0 +1,24 @@
+JAVA
+
+递归的方式与迭代的不同之处是，递归是从链表的尾部进行处理的，遍历链表，记录末尾节点，用newhead记录，作为新链表的头结点，
+工作指针head递归返回时，将head->next赋给head->next->next，并将head->next置为NULL。
+
+public class ListNode{
+	int val ;
+	ListNode next;
+	ListNode(int x){ val = x ;}
+}
+
+class Solution{
+	public ListNode reverseList(ListNode head){
+		if(head == null || head.next ==null)
+			return head;
+		ListNode newhead = reverseList(head.next);  //递归到链尾
+		
+		head.next.next = head;  //反转链表
+		head.next = null;	//将指针置为null
+		
+		return newhead;
+		
+	}
+}

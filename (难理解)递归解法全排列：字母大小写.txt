@@ -1,0 +1,22 @@
+﻿技巧：大小写字母转换：异或运算，s[i] ^=(1<<5).   异或的特性：不进位加法
+既可以大转小，也可以小转大.
+
+class Solution {
+    public List<String> letterCasePermutation(String S) {
+        List<String> ans = new ArrayList<String>();
+        dg(S.toCharArray(),0,ans);
+        return ans;
+    }
+    public void dg(char[] s,int i,List<String> ans){
+        if(i==s.length){  //递归结束条件
+            ans.add(String.valueOf(s));
+            return;
+        }
+        dg(s,i+1,ans);   //当前的值 与该值后面的递归结果进行组合
+        if(s[i]<'0'||s[i]>'9'){ //当前的值改变后，与该值后面的递归结果进行组合
+            s[i]^=(1<<5);
+            dg(s,i+1,ans);
+        }
+        
+    }
+}

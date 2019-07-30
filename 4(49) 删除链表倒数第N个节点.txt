@@ -1,0 +1,59 @@
+题目：
+删除链表的倒数第N个节点，给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。  n的值有效。
+示例：给定一个链表: 1->2->3->4->5,和 n = 2.
+当删除了倒数第二个节点后，链表变为 1->2->3->5.
+
+算法：快慢指针的应用
+	要删除倒数第二个，画图，要有指向倒数第二个前一个的指针
+	12345  即最后要 slow指向3，fast指向5   fast =slow+2;
+
+C
+
+struct ListNode{
+	int val;
+	struct ListNode *next;
+};
+
+struct ListNode * remove(struct ListNode* head,int n){
+	struct ListNode * slow =head ,fast =head;
+	for(int i=1;i<=n;i++)  //fast领先slow n个
+	{
+		fast = fast->next;
+		if(!fast)  //当fast为最后一个结点，删除头结点即可，
+			return head->next;
+	}
+	
+	while(fast -> next){
+		fast = fast->next;
+		slow =slow->next;
+	}
+	slow ->next =slow->next->next;
+	retrun head;
+}
+
+
+JAVA
+public class ListNode{
+	int val;
+	ListNode next;
+	ListNode(int x){ val =x;}
+}
+
+class Solution{
+	public ListNode remove(ListNode head,int n){
+		ListNode slow =head,fast=head;
+		for(int i=1;i<=n;i++)  //fast领先slow n个
+	{
+		fast = fast.next;
+		if(!fast)  //当fast为最后一个结点，删除头结点即可，
+			return head.next;
+	}
+	
+	while(fast.next){
+		fast = fast.next;
+		slow =slow.next;
+	}
+	slow.next =slow.next.next;
+	retrun head;
+	}
+}
